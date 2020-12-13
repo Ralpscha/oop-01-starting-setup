@@ -2,7 +2,7 @@ const productList = {
     products : [
         {
             title: 'A Pillow',
-            imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm-vG3f0g-1DZCF8qXn2_ctc_VA4zriLe_WlTmatOSu-Wk3sRrCNINN8B4jb4Dc0OR_rzdYY3R&usqp=CAc',
+            imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJUJvt5uS6aJKfUwYz3nq8sVZh0N-2xh4jlb6xEWUdNCk2818k4Bj_wCgf7ls&usqp=CAc',
             price: 19.99,
             description: 'A soft pillow'
         },
@@ -13,4 +13,28 @@ const productList = {
             description: 'A warm carpet'
         }
     ],
+    render() {
+        const renderHook = document.getElementById('app');
+        const prodList = document.createElement('ul');
+        prodList.className = 'product-list';
+        for (const prod of this.products) {
+            const prodEl = document.createElement('li');
+            prodEl.className = 'product-item';
+            prodEl.innerHTML = `
+            <div>
+                <img src = "${prod.imageURL}" alt="${prod.title}">
+                <div class="product-item__content">
+                    <h2>${prod.title}</h2>
+                    <h3>${prod.price}</h3>
+                    <p>${prod.description}</p>
+                    <button>Add to Cart</button>          
+                </div>
+            </div>
+            `;
+            prodList.append(prodEl);
+        }
+        renderHook.append(prodList);
+    }
 };
+
+productList.render();
