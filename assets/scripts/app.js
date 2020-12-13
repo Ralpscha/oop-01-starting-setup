@@ -1,5 +1,28 @@
+class Product  {
+    title = 'DEFAULT';
+    imageURL;
+    price;
+    description
+
+    constructor(title, image, price, desc) {
+        this.title = title;
+        this.imageURL = image;
+        this.price = price;
+        this.description = desc;
+    }
+}
+
+
+
+
+
 const productList = {
     products : [
+        new Product('A first Pillow',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJUJvt5uS6aJKfUwYz3nq8sVZh0N-2xh4jlb6xEWUdNCk2818k4Bj_wCgf7ls&usqp=CAc',
+            9.99,
+            'A first pillow'),
+
         {
             title: 'A Pillow',
             imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJUJvt5uS6aJKfUwYz3nq8sVZh0N-2xh4jlb6xEWUdNCk2818k4Bj_wCgf7ls&usqp=CAc',
