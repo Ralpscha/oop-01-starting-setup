@@ -104,6 +104,7 @@ class Shop {
 }
 
 class App {
+    static cart;
 
     static init() {
         const shop = new Shop();
