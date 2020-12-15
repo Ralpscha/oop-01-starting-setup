@@ -9,37 +9,16 @@ class Product  {
     }
 }
 
-class ProductList {
-    products = [
-        new Product('A first Pillow',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5XKY5YexNWsWuomB9OBVxKNSmjip-g8gRc3BCLtss5R_Gqb8IO_Ve2pVrxX_nfAypIIUBCK8&usqp=CAc',
-            9.99,
-            'A first pillow'),
 
-        new Product(
-            'A Carpet',
-            'https://d25tp5yt5ghnv4.cloudfront.net/image/desk_pdp_zoom/515242',
-            200.91,
-            "lekker warm tapijtje" ),
 
-    ];
-
-    constructor() {}
-
-    render() {
-        const prodList = document.createElement('ul');
-        prodList.className = 'product-list';
-        for (const prod of this.products) {
-            const productItem = new ProductItem(prod);
-            const prodEl = productItem.render();
-            prodList.append(prodEl);
-        }
-        return prodList;
-    }
-}
 
 class ShoppingCart {
     items = [];
+
+    addProduct() {
+        this.items.push(product);
+        this.totalOutput = `<h2>Total: \$${1}</h2>`;
+        }
 
     render() {
         const cartEl = document.createElement('section');
@@ -48,6 +27,7 @@ class ShoppingCart {
             <button>Order Now!</button>
         `;
         cartEl.className = 'cart';
+        this.totalOutput = cartEl.querySelector('h2');
         return cartEl;
     }
 
@@ -80,6 +60,35 @@ class ProductItem {
         const addCartButton = prodEl.querySelector('button');
         addCartButton.addEventListener('click', this.addToCart.bind(this));
         return prodEl;
+    }
+}
+
+class ProductList {
+    products = [
+        new Product('A first Pillow',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5XKY5YexNWsWuomB9OBVxKNSmjip-g8gRc3BCLtss5R_Gqb8IO_Ve2pVrxX_nfAypIIUBCK8&usqp=CAc',
+            9.99,
+            'A first pillow'),
+
+        new Product(
+            'A Carpet',
+            'https://d25tp5yt5ghnv4.cloudfront.net/image/desk_pdp_zoom/515242',
+            200.91,
+            "lekker warm tapijtje" ),
+
+    ];
+
+    constructor() {}
+
+    render() {
+        const prodList = document.createElement('ul');
+        prodList.className = 'product-list';
+        for (const prod of this.products) {
+            const productItem = new ProductItem(prod);
+            const prodEl = productItem.render();
+            prodList.append(prodEl);
+        }
+        return prodList;
     }
 }
 
