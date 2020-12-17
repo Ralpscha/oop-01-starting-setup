@@ -15,9 +15,18 @@ class Product  {
 class ShoppingCart {
     items = [];
 
+    //setter schijnt optioneel te zijn.
+    
+
+    get totalAmount() {
+        const sum = this.items.reduce(
+            (prevValue, curItem) => prevValue + curItem.price, 0);
+        return sum;
+    }
+
     addProduct(product) {
         this.items.push(product);
-        this.totalOutput.innerHTML = `<h2>Total: \$${1}</h2>`;
+        this.totalOutput.innerHTML = `<h2>Total: \$${this.totalAmount}</h2>`;
         }
 
     render() {
