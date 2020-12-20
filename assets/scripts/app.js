@@ -33,7 +33,6 @@ class Component {
         }
         document.getElementById(this.hookId).append(rootElement);
         return rootElement;
-
     }
 }
 
@@ -65,19 +64,18 @@ class ShoppingCart extends Component {
         }
 
     render() {
-        // const cartEl = document.createElement('section');
         const cartEl = this.createRootElement('section','cart',);
         cartEl.innerHTML = `
             <h2>Total: \$${0}</h2>
             <button>Order Now!</button>
         `;
-        // cartEl.className = 'cart';
         this.totalOutput = cartEl.querySelector('h2');
         }
 }
 
-class ProductItem {
-    constructor(product) {
+class ProductItem extends Component {
+    constructor(product, renderHookId) {
+        super(renderHookId);
         this.product = product;
     }
 
@@ -86,8 +84,7 @@ class ProductItem {
     }
 
     render() {
-        const prodEl = document.createElement('li');
-        prodEl.className = 'product-item';
+        const prodEl = this.createRootElement('li', 'product-item')
         prodEl.innerHTML = `
             <div>
                 <img src = "${this.product.imageURL}" alt="${this.product.title}">
@@ -101,11 +98,10 @@ class ProductItem {
             `;
         const addCartButton = prodEl.querySelector('button');
         addCartButton.addEventListener('click', this.addToCart.bind(this));
-        return prodEl;
     }
 }
 
-class ProductList {
+class ProductList extends Component {
     products = [
         new Product('A first Pillow',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5XKY5YexNWsWuomB9OBVxKNSmjip-g8gRc3BCLtss5R_Gqb8IO_Ve2pVrxX_nfAypIIUBCK8&usqp=CAc',
@@ -120,30 +116,26 @@ class ProductList {
 
     ];
 
-    constructor() {}
+    constructor(renderHookId) {
+        super(renderHookId);
+    }
 
     render() {
-        const prodList = document.createElement('ul');
-        prodList.className = 'product-list';
+        this.createRootElement('ul', 'product-list',
+            [new ElementAttribute('id', 'prod-list')]);
         for (const prod of this.products) {
-            const productItem = new ProductItem(prod);
-            const prodEl = productItem.render();
-            prodList.append(prodEl);
-        }
-        return prodList;
+            const productItem = new ProductItem(prod, 'prod-list');
+            productItem.render();
+            }
     }
 }
 
 class Shop {
     render() {
-        const renderHook = document.getElementById('app');
         this.cart = new ShoppingCart('app');
         this.cart.render();
-        // const cartEl = this.cart.render();
-        const productList = new ProductList();
-        const prodListEl = productList.render();
-        // renderHook.append(cartEl);
-        renderHook.append(prodListEl);
+        const productList = new ProductList('app');
+        productList.render();
     }
 }
 
